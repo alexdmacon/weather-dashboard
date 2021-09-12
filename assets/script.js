@@ -59,7 +59,7 @@ function forecastWeather(city) {
             
             // displays today's humidity
             var humidityDisplay=document.createElement("li");
-            humidityDisplay.textContent = "Humidity: " + data.main.humidity + " %";
+            humidityDisplay.textContent = "Humidity: " + data.main.humidity + "%";
             todayForecast.append(humidityDisplay);
 
             //Where the heck do I find the UV index?
@@ -70,9 +70,9 @@ function forecastWeather(city) {
     })
 }
 
+// uses different API URL to fetch different set of data, in this case for the 5-day forecast
 function fiveDayForecast(city) {
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + APIKey;
-
 
     fetch(queryURL)
     .then(function (response) {
@@ -83,10 +83,17 @@ function fiveDayForecast(city) {
             fiveDayDisplay.textContent="5-Day Forecast";
             fiveDayDiv.append(fiveDayDisplay);
 
-            // loop populates five-day forecast section with five-day forecast
+            // loop populates five-day forecast section with appropriate data
             for (let i = 0; i < 5; i++) {
                 fiveDayForecastEls[i].innerHTML="";
 
+                //gets dates for 5-day forecast
+                var forecastDay = dayjs().add(i+1, "day").format("MM/DD/YYYY");
+                console.log(forecastDay);
+                var forecastDayDisplay = document.createElement("h3");
+                forecastDayDisplay.textContent=forecastDay;
+                fiveDayForecastEls[i].append(forecastDayDisplay);
+               
                 var weatherIcon = data.list[i].weather[0].icon;
                 var iconDisplay = document.createElement("img");
                 iconDisplay.width=100;
@@ -103,7 +110,7 @@ function fiveDayForecast(city) {
                 fiveDayForecastEls[i].append(windDisplay);
 
                 var humidityDisplay=document.createElement("li");
-                humidityDisplay.textContent = "Humidity: " + data.list[i].main.humidity + " %";
+                humidityDisplay.textContent = "Humidity: " + data.list[i].main.humidity + "%";
                 fiveDayForecastEls[i].append(humidityDisplay);
             }
         })
