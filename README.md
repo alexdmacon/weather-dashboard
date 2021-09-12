@@ -11,3 +11,5 @@ https://webdesign.tutsplus.com/tutorials/build-a-simple-weather-app-with-vanilla
 https://openweathermap.org/current
 
 https://day.js.org/docs/en/installation/browser
+
+https://www.youtube.com/watch?v=GXrDEA3SIOQ
