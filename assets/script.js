@@ -6,6 +6,8 @@ var todayForecast = document.querySelector("#today-forecast");
 var todayDate = dayjs().format("MM/DD/YYYY");
 var fiveDayForecastEls = document.querySelectorAll(".day-forecast")
 var fiveDayDiv = document.querySelector("#five-day-forecast");
+var pastSearches = document.querySelector("#past-searches");
+var searches=0;
 
 // Form submit handler
 searchForm.addEventListener("submit", citySearch);
@@ -21,8 +23,26 @@ function citySearch(event){
         console.log(city);
         forecastWeather(city);
         fiveDayForecast(city);
+
+        localStorage.setItem(searches, city);
+        searches = searches+1;
+        displaySearches();
     }
 }
+
+function displaySearches() {
+    for (let i = 0; i < searches.length; i++) {
+        var pastSearch=localstorage.getItem(i);
+        console.log(pastSearch);
+        var searchDisplay=document.createElement("li");
+        searchDisplay.textContent=pastSearch;
+        pastSearches.append(searchDisplay);
+    }
+
+
+}
+
+
 
 // fetches data from OpenWeather API using city input.
 function forecastWeather(city) {
@@ -70,7 +90,7 @@ function forecastWeather(city) {
     })
 }
 
-// uses different API URL to fetch different set of data, in this case for the 5-day forecast
+// uses different API URL (but same city value from input form) to fetch different set of data, in this case for the 5-day forecast
 function fiveDayForecast(city) {
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + APIKey;
 
