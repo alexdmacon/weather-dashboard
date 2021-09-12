@@ -20,18 +20,18 @@
                 <h2 class="search-heading">Search for a City:</h2>
                 <form id="search-form">
                 <!--Enter search query here-->
-                    <input type="text" id="search-input" placeholder="Type city name here" class="form-input w-100">
-                    <button type="button" class="btn btn-primary btn-lg" id="search-button">Search</button>
+                    <input id="city-search-input" type="text" placeholder="Type city name here.">
+                    <button type="submit" class="btn btn-primary btn-lg" id="search-button">Search</button>
                 </form>
             <!--Where past searches will be appended from local storage-->
                 <form class="past-searches flex-column"></form>
             </div>
             <!--Where forecast data fetched from API will populate after search-->
             <div class="col-9">
-                <div class="today-forecast">
+                <div id="today-forecast">
                     <h2>Today's Forecast Will Go Here<h2>
                 </div>
-                <div class="d-flex row 5-day-forecast">
+                <div class="d-flex row" id ="5-day-forecast">
                     <h2>Here's the 5-Day forecast</h2>
                     <div class="col day-1">Day 1</div>
                     <div class="col day-2">Day 2</div>
