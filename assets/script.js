@@ -1,20 +1,28 @@
 var city;
 var searchForm = document.querySelector("#search-form");
 var searchBtn = document.querySelector("#search-button");
+var APIKey = "e256b571cb3fa1813dc8566aad393b43";
+var todayForecast = document.querySelector("#today-forecast");
+var todayDate = dayjs().format("MMMM D, YYYY");
 
+// Form submit handler
+searchForm.addEventListener("submit", citySearch);
 
+// Controls the search form. Takes city name input and carries it over as parameter for the next function that fetches the API data.
 function citySearch(event){
     event.preventDefault();
+
     var searchInput = document.querySelector("#city-search-input");
     city = searchInput.value;
+
     if (city) {
         console.log(city);
         forecastWeather(city);
     }
 }
 
+// fetches data from OpenWeather API using city input.
 function forecastWeather(city) {
-    var APIKey = "e256b571cb3fa1813dc8566aad393b43";
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
     fetch(queryURL)
@@ -27,24 +35,8 @@ function forecastWeather(city) {
     })
 }
 
-searchForm.addEventListener("submit", citySearch);
-
-/* var searchFormEl = document.querySelector('#search-form');
-
-function handleSearchFormSubmit(event) {
-  event.preventDefault();
-
-  var searchInputVal = document.querySelector('#search-input').value;
-  var formatInputVal = document.querySelector('#format-input').value;
-
-  if (!searchInputVal) {
-    console.error('You need a search input value!');
-    return;
-  }
-
-  var queryString = './search-results.html?q=' + searchInputVal + '&format=' + formatInputVal;
-
-  location.assign(queryString);
+function displayForecast() {
+    console.log(todayDate);
+    todayForecast.textContent.todayDate;
 }
 
-searchFormEl.addEventListener('submit', handleSearchFormSubmit); */ 
