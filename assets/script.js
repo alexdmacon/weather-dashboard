@@ -47,11 +47,20 @@ function displaySearches() {
     var pastSearch = searchHistory[i];
     var searchDisplay = document.createElement("BUTTON");
     searchDisplay.textContent = pastSearch;
-    searchDisplay.setAttribute("value", pastSearch);
-    searchDisplay.addEventListener("click", function() {
-      forecastWeather(pastSearch);
-    })
+    searchDisplay.setAttribute("class", "city-search-buttons");
+    searchDisplay.setAttribute("id", pastSearch);
+    console.log(pastSearch);
     pastSearches.append(searchDisplay);
+
+    searchDisplay.addEventListener("click", searchAgain);
+  }
+}
+
+function searchAgain(event){
+  var city = event.target.getAttribute("id")
+  if (city){
+    forecastWeather(city);
+    fiveDayForecast(city);
   }
 }
 
