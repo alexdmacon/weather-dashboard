@@ -9,6 +9,7 @@ var fiveDayDiv = document.querySelector("#five-day-forecast");
 var pastSearches = $("#past-searches");
 var searches = 0;
 var pastSearchesKeywords = [];
+var fiveDayDisplay="";
 
 localStorage.clear();
 
@@ -27,6 +28,8 @@ function citySearch(event) {
     forecastWeather(city);
     fiveDayForecast(city);
 
+
+    // Takes input and pushes it into an array to be stashed in localStorage
     pastSearchesKeywords.push(city);
 
     localStorage.setItem("pastSearches", JSON.stringify(pastSearchesKeywords));
@@ -36,6 +39,7 @@ function citySearch(event) {
   }
 }
 
+// gets previous inputs out of localStorage and displays them on page
 function displaySearches() {
   pastSearches.empty();
   var searchHistory = JSON.parse(localStorage.pastSearches);
@@ -55,6 +59,12 @@ function forecastWeather(city) {
     "&units=imperial" +
     "&appid=" +
     APIKey;
+
+    //clears previous forecasts upon new search
+    todayForecast.textContent="";
+    fiveDayForecastEls.textContent="";
+    fiveDayDisplay.textContent="";
+
 
   fetch(queryURL).then(function (response) {
     response.json().then(function (data) {
@@ -112,7 +122,7 @@ function fiveDayForecast(city) {
     response.json().then(function (data) {
       console.log(data);
 
-      var fiveDayDisplay = document.createElement("h2");
+      fiveDayDisplay = document.createElement("h2");
       fiveDayDisplay.textContent = "5-Day Forecast";
       fiveDayDiv.append(fiveDayDisplay);
 
