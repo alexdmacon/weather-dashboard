@@ -47,9 +47,12 @@ function displaySearches() {
     var pastSearch = searchHistory[i];
     var searchDisplay = document.createElement("BUTTON");
     searchDisplay.textContent = pastSearch;
+    searchDisplay.setAttribute("value", searchHistory[i]);
+    console.log(searchDisplay.value);
     pastSearches.append(searchDisplay);
   }
 }
+
 
 // fetches data from OpenWeather API using city input.
 function forecastWeather(city) {
