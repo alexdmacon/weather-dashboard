@@ -45,7 +45,7 @@ function displaySearches() {
   var searchHistory = JSON.parse(localStorage.pastSearches);
   for (let i = 0; i < searchHistory.length; i++) {
     var pastSearch = searchHistory[i];
-    var searchDisplay = document.createElement("li");
+    var searchDisplay = document.createElement("BUTTON");
     searchDisplay.textContent = pastSearch;
     pastSearches.append(searchDisplay);
   }
@@ -60,10 +60,9 @@ function forecastWeather(city) {
     "&appid=" +
     APIKey;
 
-    //clears previous forecasts upon new search
     todayForecast.textContent="";
     fiveDayForecastEls.textContent="";
-    fiveDayDisplay.textContent="";
+    fiveDayDisplay.textContent=""
 
 
   fetch(queryURL).then(function (response) {
