@@ -21,3 +21,5 @@ https://day.js.org/docs/en/manipulate/add
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 
+https://openweather.co.uk/blog/post/uv-index-now-part-one-call-api
+

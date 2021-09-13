@@ -9,7 +9,7 @@ var fiveDayDiv = document.querySelector("#five-day-forecast");
 var pastSearches = $("#past-searches");
 var searches = 0;
 var pastSearchesKeywords = [];
-var fiveDayDisplay="";
+var fiveDayDisplay = "";
 
 localStorage.clear();
 
@@ -28,7 +28,6 @@ function citySearch(event) {
     forecastWeather(city);
     fiveDayForecast(city);
 
-
     // Takes input and pushes it into an array to be stashed in localStorage
     pastSearchesKeywords.push(city);
 
@@ -39,7 +38,7 @@ function citySearch(event) {
   }
 }
 
-// gets previous inputs out of localStorage and displays them on page
+// gets previous inputs out of localStorage and displays them on page. Also creates necessary class and id tags to click past search items to renew weather forecast.
 function displaySearches() {
   pastSearches.empty();
   var searchHistory = JSON.parse(localStorage.pastSearches);
@@ -52,20 +51,19 @@ function displaySearches() {
     console.log(pastSearch);
     pastSearches.append(searchDisplay);
 
+    // Clicking one of the newly created buttons fires the searchAgain function, which will get the forecasts for the previously searched city that is clicked
     searchDisplay.addEventListener("click", searchAgain);
   }
 }
 
-function searchAgain(event){
-  var city = event.target.getAttribute("id")
-  if (city){
+function searchAgain(event) {
+  var city = event.target.getAttribute("id");
+  if (city) {
     forecastWeather(city);
     fiveDayForecast(city);
   }
 }
 
-
-// fetches data from OpenWeather API using city input.
 function forecastWeather(city) {
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
@@ -74,11 +72,12 @@ function forecastWeather(city) {
     "&appid=" +
     APIKey;
 
-    todayForecast.textContent="";
-    fiveDayForecastEls.textContent="";
-    fiveDayDisplay.textContent=""
+  // clears previous forecast data
+  todayForecast.textContent = "";
+  fiveDayForecastEls.textContent = "";
+  fiveDayDisplay.textContent = "";
 
-
+  // fetches data from OpenWeather API using city input.
   fetch(queryURL).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
@@ -116,11 +115,34 @@ function forecastWeather(city) {
       todayForecast.append(humidityDisplay);
 
       //Where the heck do I find the UV index?
-      var uvDisplay = document.createElement("li");
-      uvDisplay.textContent = "UV Index: ";
+      // https://openweather.co.uk/blog/post/uv-index-now-part-one-call-api
+
+
+      var lat = data.coord.lat;
+      var lon = data.coord.lon;
+      console.log(lat);
+      console.log(lon);
+      getUV(lat, lon);
+
+      
     });
   });
 }
+
+function getUV(lat, lon){
+  var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+  fetch(queryURL).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+
+      var uvDisplay = document.createElement("li");
+      uvDisplay.textContent = "UV Index: " + data.current.uvi;
+      todayForecast.append(uvDisplay);
+
+    })
+  })
+}
+
 
 // uses different API URL (but same city value from input form) to fetch different set of data, in this case for the 5-day forecast
 function fiveDayForecast(city) {
