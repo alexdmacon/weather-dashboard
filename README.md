@@ -23,3 +23,5 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 https://openweather.co.uk/blog/post/uv-index-now-part-one-call-api
 
+https://www.epa.gov/sunsafety/uv-index-scale-0
+

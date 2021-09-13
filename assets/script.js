@@ -117,32 +117,46 @@ function forecastWeather(city) {
       //Where the heck do I find the UV index?
       // https://openweather.co.uk/blog/post/uv-index-now-part-one-call-api
 
-
       var lat = data.coord.lat;
       var lon = data.coord.lon;
       console.log(lat);
       console.log(lon);
       getUV(lat, lon);
-
-      
     });
   });
 }
 
-function getUV(lat, lon){
-  var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+// get and display UV index info.
+function getUV(lat, lon) {
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&appid=" +
+    APIKey;
   fetch(queryURL).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
 
       var uvDisplay = document.createElement("li");
       uvDisplay.textContent = "UV Index: " + data.current.uvi;
+
+      if (data.current.uvi < 4) {
+        uvDisplay.setAttribute("class", "favorable");
+      } else if (data.current.uvi < 8) {
+        uvDisplay.setAttribute("class", "moderate");
+      } else {
+        uvDisplay.setAttribute("class", "severe");
+      }
+
+      /*       WHEN I view the UV index
+      THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe */
+      // https://www.epa.gov/sunsafety/uv-index-scale-0
       todayForecast.append(uvDisplay);
-
-    })
-  })
+    });
+  });
 }
-
 
 // uses different API URL (but same city value from input form) to fetch different set of data, in this case for the 5-day forecast
 function fiveDayForecast(city) {
