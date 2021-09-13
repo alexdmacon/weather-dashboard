@@ -47,8 +47,10 @@ function displaySearches() {
     var pastSearch = searchHistory[i];
     var searchDisplay = document.createElement("BUTTON");
     searchDisplay.textContent = pastSearch;
-    searchDisplay.setAttribute("value", searchHistory[i]);
-    console.log(searchDisplay.value);
+    searchDisplay.setAttribute("value", pastSearch);
+    searchDisplay.addEventListener("click", function() {
+      forecastWeather(pastSearch);
+    })
     pastSearches.append(searchDisplay);
   }
 }
