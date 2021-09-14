@@ -66,7 +66,7 @@ function searchAgain(event) {
 
 function forecastWeather(city) {
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     city +
     "&units=imperial" +
     "&appid=" +
@@ -95,7 +95,7 @@ function forecastWeather(city) {
       iconDisplay.height = 100;
       iconDisplay.setAttribute(
         "src",
-        "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+        "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
       );
       todayForecast.append(iconDisplay);
 
@@ -193,7 +193,7 @@ function fiveDayForecast(city) {
         iconDisplay.height = 100;
         iconDisplay.setAttribute(
           "src",
-          "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
+          "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png"
         );
         fiveDayForecastEls[i].append(iconDisplay);
 
