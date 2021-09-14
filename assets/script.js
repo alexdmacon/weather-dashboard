@@ -140,20 +140,19 @@ function getUV(lat, lon) {
       console.log(data);
 
       var uvDisplay = document.createElement("li");
-      uvDisplay.textContent = "UV Index: " + data.current.uvi;
+      var uvDisplayNumber = document.createElement("span")
+      uvDisplay.textContent = "UV Index: ";
+      uvDisplayNumber.textContent = data.current.uvi;
 
       if (data.current.uvi < 4) {
-        uvDisplay.setAttribute("class", "favorable");
+        uvDisplayNumber.setAttribute("class", "favorable");
       } else if (data.current.uvi < 8) {
-        uvDisplay.setAttribute("class", "moderate");
+        uvDisplayNumber.setAttribute("class", "moderate");
       } else {
-        uvDisplay.setAttribute("class", "severe");
+        uvDisplayNumber.setAttribute("class", "severe");
       }
-
-      /*       WHEN I view the UV index
-      THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe */
-      // https://www.epa.gov/sunsafety/uv-index-scale-0
       todayForecast.append(uvDisplay);
+      uvDisplay.append(uvDisplayNumber);
     });
   });
 }
