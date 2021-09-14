@@ -114,9 +114,6 @@ function forecastWeather(city) {
       humidityDisplay.textContent = "Humidity: " + data.main.humidity + "%";
       todayForecast.append(humidityDisplay);
 
-      //Where the heck do I find the UV index?
-      // https://openweather.co.uk/blog/post/uv-index-now-part-one-call-api
-
       var lat = data.coord.lat;
       var lon = data.coord.lon;
       console.log(lat);
@@ -140,7 +137,7 @@ function getUV(lat, lon) {
       console.log(data);
 
       var uvDisplay = document.createElement("li");
-      var uvDisplayNumber = document.createElement("span")
+      var uvDisplayNumber = document.createElement("span");
       uvDisplay.textContent = "UV Index: ";
       uvDisplayNumber.textContent = data.current.uvi;
 

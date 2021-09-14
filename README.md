@@ -10,7 +10,7 @@ Download the files and then view the code.
 - The app was deployed via GitHub pages and is live here: https://alexdmacon.github.io/weather-dashboard/
 - Here's a link to the repo you're on now: https://github.com/alexdmacon/weather-dashboard
 
-![Gif demonstrating the app in action coming soon]
+![Gif demonstrating the app in action](/assets/images/weather-dashboard.gif)
 
 ## Usage
 Type the name of the city where you'd like to see a weather forecast in the search box on the left side of the screen and click the search button. Search for as many cities as you like. To go back to a previously inputted city's forecast, select the city's name from the list that populates under the search bar.
